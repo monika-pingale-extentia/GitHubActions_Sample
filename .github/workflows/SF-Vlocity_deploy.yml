@@ -3,15 +3,21 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [ dev ]
 jobs:
-  deployCI:
+  deploy:
     runs-on: ubuntu-latest
     container:
       image: jfgarcia268/vlocity_sfdx:v7.0
     steps:  
     - uses: actions/checkout@v2
-    - name: Check Tools	    
+    - name: SF deploy	    
       run: |
-        sfdx force  
-        vlocity help     
+        echo ${{ secrets.SuperSecret }}  > env.sfdx
+        sfdx force:auth:sfdxurl:store -d -a ALIAS -f env.sfdx
+        sfdx force:source:deploy --sourcepath salesforce_sfdx --targetusername ALIAS --verbose    
+    - name: Vlocity deploy   
+      run: |
+        echo ${{ secrets.SuperSecret }} > env.sfdx
+        sfdx force:auth:sfdxurl:store -d -a ALIAS -f env.sfdx
+        vlocity -sfdx.username ALIAS -job Deploy_Delta.yaml packDeploy --verbose true --simpleLogging true  
