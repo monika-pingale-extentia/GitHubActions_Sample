@@ -14,6 +14,8 @@ jobs:
       image: jfgarcia268/sfdx_vlocity_java:v12.0
     steps:  
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: SF deploy	    
       run: |
         echo ${{ secrets.${{ github.event.inputs.targetEnv }} }}  > env.sfdx
