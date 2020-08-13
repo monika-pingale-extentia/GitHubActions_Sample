@@ -12,7 +12,6 @@ jobs:
     steps:  
     - uses: actions/checkout@v2
     - name: Check Tools	    
-      uses: docker://jfgarcia268/vlocity_sfdx:v7.0
       run: |
         sfdx force  
         vlocity help     
