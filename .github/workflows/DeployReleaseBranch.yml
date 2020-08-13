@@ -11,16 +11,19 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     container:
-      image: jfgarcia268/sfdx_vlocity_java:v12.0
+      image: jfgarcia268/sfdx_vlocity_java:v13.0
     steps:  
     - uses: actions/checkout@v2
-    - name: SF deploy	    
+      with:
+        fetch-depth: 0
+    - name: SF deploy     
       run: |
-        echo ${{ secrets.${{ github.event.inputs.targetEnv }} }}  > env.sfdx
+        echo ${{ secrets[github.event.inputs.targetEnv] }}  > env.sfdx
         sfdx force:auth:sfdxurl:store -d -a ALIAS -f env.sfdx
         sfdx force:source:deploy --sourcepath salesforce_sfdx --targetusername ALIAS --verbose    
     - name: Vlocity deploy   
       run: |
-        echo ${{ secrets.${{ github.event.inputs.targetEnv }} }} > env.sfdx
+        echo ${{ secrets[github.event.inputs.targetEnv] }} > env.sfdx
         sfdx force:auth:sfdxurl:store -d -a ALIAS -f env.sfdx
         vlocity -sfdx.username ALIAS -job Deploy_Delta.yaml packDeploy --verbose true --simpleLogging true  
+
