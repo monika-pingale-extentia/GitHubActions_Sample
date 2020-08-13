@@ -14,6 +14,7 @@ jobs:
     - name: test git
       run: |
         git --help
+        git --version
         ls -la 
         ls -la .git
     - name: SF deploy	    
