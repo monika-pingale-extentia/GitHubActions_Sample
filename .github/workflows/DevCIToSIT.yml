@@ -8,7 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     container:
-      image: jfgarcia268/vlocity_sfdx:v7.0
+      image: jfgarcia268/sfdx_vlocity_java:v12.0
     steps:  
     - uses: actions/checkout@v2
     - name: SF deploy	    
