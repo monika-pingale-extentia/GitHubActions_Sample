@@ -13,11 +13,11 @@ jobs:
     - uses: actions/checkout@v2
     - name: SF deploy	    
       run: |
-        echo ${{ secrets.SuperSecret }}  > env.sfdx
+        echo ${{ secrets.SIT_SFDX_URL }}  > env.sfdx
         sfdx force:auth:sfdxurl:store -d -a ALIAS -f env.sfdx
         sfdx force:source:deploy --sourcepath salesforce_sfdx --targetusername ALIAS --verbose    
     - name: Vlocity deploy   
       run: |
-        echo ${{ secrets.SuperSecret }} > env.sfdx
+        echo ${{ secrets.SIT_SFDX_URL }} > env.sfdx
         sfdx force:auth:sfdxurl:store -d -a ALIAS -f env.sfdx
         vlocity -sfdx.username ALIAS -job Deploy_Delta.yaml packDeploy --verbose true --simpleLogging true  
