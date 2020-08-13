@@ -13,12 +13,6 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - name: test git
-      run: |
-        git --help
-        git --version
-        ls -la 
-        ls -la .git
     - name: SF deploy	    
       run: |
         echo ${{ secrets.SIT_SFDX_URL }}  > env.sfdx
