@@ -11,6 +11,11 @@ jobs:
       image: jfgarcia268/sfdx_vlocity_java:v12.0
     steps:  
     - uses: actions/checkout@v2
+    - name: test git
+      run: |
+        git --help
+        ls -la 
+        ls -la .git
     - name: SF deploy	    
       run: |
         echo ${{ secrets.SIT_SFDX_URL }}  > env.sfdx
