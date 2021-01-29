@@ -1,0 +1,8 @@
+Name: New
+ignoreDependencies: false
+VlocityDataPackKeys:
+    - DataRaptor/AccountSearch
+VlocityTypesToFetch:
+    - DataRaptor
+SalesforceTypesToFetch:
+    - CustomMetadata
